@@ -10,7 +10,7 @@ app.set('port', port);
 app.get('/', function(request, response) {
   response.sendFile(path.join(__dirname, 'index.html'));
 });
-server.listen(5000, function() {
+server.listen(port, function() {
   console.log('Starting server on port' + port);
 });
 var clicks = 0;
