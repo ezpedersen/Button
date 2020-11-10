@@ -5,12 +5,13 @@ var socketIO = require('socket.io');
 var app = express();
 var server = http.Server(app);
 var io = socketIO(server);
-app.set('port', 5000);
+var port = process.env.PORT || 5000;
+app.set('port', port);
 app.get('/', function(request, response) {
   response.sendFile(path.join(__dirname, 'index.html'));
 });
 server.listen(5000, function() {
-  console.log('Starting server on port 5000');
+  console.log('Starting server on port' + port);
 });
 var clicks = 0;
 io.on('connection', function(socket) {
