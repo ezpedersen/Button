@@ -11,12 +11,18 @@ app.get('/', function(request, response) {
   response.sendFile(path.join(__dirname, 'index.html'));
 });
 server.listen(port, function() {
-  console.log('Starting server on port' + port);
+  console.log('Starting server on port ' + port);
 });
-var clicks = 0;
+const fs = require('fs');
+var clicks;
 io.on('connection', function(socket) {
 	socket.on('press',function(){
+		clicks = fs.readFileSync('clicks.txt','utf8');
 		clicks++;
+		console.log(clicks);
+		fs.writeFile('clicks.txt', clicks, function (err) {
+		  if (err) return console.log(err);
+		});
 	});
 });
 setInterval(function(){
